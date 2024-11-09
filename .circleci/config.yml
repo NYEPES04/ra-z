@@ -35,6 +35,7 @@ jobs:
       - run:
           name: Deploy to Railway App
           command: |
+            echo "RAILWAY_TOKEN is: $RAILWAY_TOKEN"
             export RAILWAY_TOKEN=$RAILWAY_TOKEN  
             cd bankchurn-api
             railway up --service=merry-blessing
