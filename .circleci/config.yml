@@ -1,4 +1,4 @@
-version: 2.1
+version: '2.1'
 orbs:
   node: circleci/node@5.1.0
 
@@ -23,23 +23,15 @@ jobs:
           path: ~/project/
       - node/install:
           node-version: '20.9'
-      - run:
-          name: Check Node Version
-          command: node --version
-      - run:
-          name: Install Railway CLI
-          command: npm i -g @railway/cli
-      - run:
-          name: Verify Railway CLI Installation
-          command: railway --version
+      - run: node --version
+      - run: npm i -g @railway/cli
       - run:
           name: Deploy to Railway App
           command: |
-            echo "RAILWAY_TOKEN is: $RAILWAY_TOKEN"
-            export RAILWAY_TOKEN=$RAILWAY_TOKEN  
-            cd bankchurn-api
+            cd bankchurn-api 
             railway up --service=merry-blessing
             railway up --detach
+
 
 tags_only: &tags_only
   filters:
@@ -49,7 +41,7 @@ tags_only: &tags_only
       only: /^.*/
 
 workflows:
-  version: 2
+  version: 1
   deploy_pipeline:
     jobs:
       - deploy_app_to_railway:
